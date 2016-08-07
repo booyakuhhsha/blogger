@@ -9,9 +9,11 @@ class ArticlesController < ApplicationController
 		@comment = Comment.new
 		@comment.article_id = @article_id
 	end
+	before_filter :require_login, only: [:new, :create, :edit, :destroy]
 	def new
 		@article = Article.new
 	end
+	before_filter :require_login, only: [:new, :create, :edit, :destroy]
 	def create
 		@article = Article.new(article_params)
   		@article.save
@@ -20,7 +22,7 @@ class ArticlesController < ApplicationController
 
   		redirect_to article_path(@article)
 	end
-	
+	before_filter :require_login, only: [:new, :create, :edit, :destroy]
 	def destroy
 		@article = Article.find(params[:id])
 		@article.destroy
@@ -29,6 +31,7 @@ class ArticlesController < ApplicationController
 
 		redirect_to action: "index"
 	end
+	before_filter :require_login, only: [:new, :create, :edit, :destroy]
 	def edit
 		@article = Article.find(params[:id])
 	end
