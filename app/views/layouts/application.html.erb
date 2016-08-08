@@ -10,7 +10,12 @@
   <p class="flash">
     <%= flash.notice %>
   </p>
+  <%= link_to "Articles", articles_path %>
+  <%= link_to "Tags", tags_path %>
+  <%= link_to "Authors", authors_path %>
+  <%= link_to "Most Popular", popular_index_path %>
   <div id="container">
+
     <div id="content">
       <%= yield %>
       <hr>

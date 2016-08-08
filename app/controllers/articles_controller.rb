@@ -1,5 +1,7 @@
 class ArticlesController < ApplicationController
 	include ArticlesHelper
+	
+	impressionist actions: [:show], unique: [:session_hash]
 
 	def index
 		@articles = Article.all
@@ -8,6 +10,7 @@ class ArticlesController < ApplicationController
 		@article = Article.find(params[:id])
 		@comment = Comment.new
 		@comment.article_id = @article_id
+		impressionist(@article)
 	end
 	before_filter :require_login, only: [:new, :create, :edit, :destroy]
 	def new
@@ -43,5 +46,6 @@ class ArticlesController < ApplicationController
 
 		redirect_to article_path(@article)
 	end
+	
 
 end
